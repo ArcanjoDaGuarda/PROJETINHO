@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proin - Notícias</title>
+</head>
+<body>
+    <h1>Notícias e Atualizações</h1>
+    {% for noticia in noticias %}
+        <div>
+            <h3>{{ noticia.titulo }}</h3>
+            <p>{{ noticia.conteudo }}</p>
+            <p>Data de Publicação: {{ noticia.data_publicacao }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
+{% endblock %}

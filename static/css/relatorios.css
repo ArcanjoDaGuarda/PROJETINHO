@@ -1,0 +1,73 @@
+/* Estilos para a Lista de Aulas */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 25%;
+}
+
+.main-content {
+    width: 75%;
+}
+
+h1 {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    background-color: #fff;
+    width: calc(100% - 60px); /* Ajuste para a largura da lista */
+    float: right; /* Alteração para alinhar à direita */
+    box-sizing: border-box;
+}
+
+strong {
+    display: contents;
+    margin-bottom: 5px;
+}
+
+.button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    width: 60px; /* Ajuste a largura do botão conforme necessário */
+    height: 2px; /* Ajuste a altura do botão conforme necessário */
+    font-size: 12.2px; /* Ajuste o tamanho da fonte do botão conforme necessário */
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #03B0EE;
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1px 0; /* Espaçamento interno no footer */
+}

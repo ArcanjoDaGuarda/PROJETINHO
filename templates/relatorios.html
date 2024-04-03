@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/lista_aula2.css' %}">
+
+<div class="container">
+  <div class="sidebar">
+    {% include 'menu_lateral_relatorio.html' with user_name=user.username num_aulas_pendentes=2 num_relatorios_pendentes=3 porcentagem_conclusao=75 %}
+  </div>
+
+  <div class="main-content">
+    <h1>Lista de Relatórios</h1>
+
+    <div class="pesquisar">
+      <form action="/pesquisar_relatorio_por_nome" method="get">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome">
+        <input type="submit" value="Pesquisar">
+      </form>
+    </div>
+
+    <div>
+      <ul>
+        {% for relatorio in relatorios %}
+        <li>
+            <strong>Nome do Relatório:</strong> {{ relatorio.nome_do_relatorio }} <br>
+            <br><strong>Mês do Relatório:</strong> {{ relatorio.mes_do_relatorio }} <br>
+            <br><strong>Ano do Relatório:</strong> {{ relatorio.ano_do_relatorio }} <br>
+            <br><strong>Descrição:</strong> {{ relatorio.descricao_do_relatorio }} <br>
+            <br><strong>Link do Relatório:</strong> <a href="{{ relatorio.link_do_relatorio }}" target="_blank">Link Direto</a> <br>
+            <br>
+        
+            <form method="post" action="{% url 'salvar_status_relatorio' relatorio.id %}">
+              {% csrf_token %}
+              <input type="hidden" name="relatorio_id" value="{{ relatorio.id }}">
+              {% if relatorio.usuario_concluiu == user %}  <input type="checkbox" name="concluido" checked>
+              {% else %}
+                <input type="checkbox" name="concluido">
+              {% endif %}
+              <label for="concluido">Marcar como Concluído</label>
+              <input type="submit" value="Salvar">
+            </form>
+            <br>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

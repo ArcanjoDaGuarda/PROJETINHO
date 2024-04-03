@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registro de Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .login-container {
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 100px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .login-container form {
+            margin-top: 20px;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="email"],
+        .login-container input[type="password"],
+        .login-container input[type="file"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #23238E;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #0a0a53;
+        }
+
+        .login-container .has-text-centered {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Registro de Usuário</h2>
+        <form method="post" action="{% url 'registro' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Campo de Nome de Usuário -->
+            <div class="form-group">
+                <label for="id_username">Nome de Usuário:</label>
+                <input type="text" name="username" id="id_username" required>
+            </div>
+
+            <!-- Campo de E-mail -->
+            <div class="form-group">
+                <label for="id_email">E-mail:</label>
+                <input type="email" name="email" id="id_email" required>
+            </div>
+
+            <!-- Campo de Senha -->
+            <div class="form-group">
+                <label for="id_password">Senha:</label>
+                <input type="password" name="password" id="id_password" required>
+            </div>
+
+            <!-- Campo de Primeiro Nome -->
+            <div class="form-group">
+                <label for="id_first_name">Nome:</label>
+                <input type="text" name="first_name" id="id_first_name" required>
+            </div>
+
+            <!-- Campo de Sobrenome -->
+            <div class="form-group">
+                <label for="id_last_name">Sobrenome:</label>
+                <input type="text" name="last_name" id="id_last_name" required>
+            </div>
+
+            <!-- Campo de Projeto PROIN -->
+            <div class="form-group">
+                <label for="id_projeto_proin">Projeto PROIN:</label>
+                <input type="text" name="projeto_proin" id="id_projeto_proin" required>
+            </div>
+
+            <!-- Campo de Código de Turma -->
+            <div class="form-group">
+                <label for="id_codigo_turma">Código de Turma:</label>
+                <input type="text" name="codigo_turma" id="id_codigo_turma" required>
+            </div>
+
+            <!-- Campo de Foto de Perfil -->
+            <div class="form-group">
+                <label for="id_profile_picture">Foto de Perfil:</label>
+                <input type="file" name="profile_picture" id="id_profile_picture">
+            </div>
+
+            <!-- Botão de Registro -->
+            <button type="submit">Registrar</button>
+        </form>
+        <p class="has-text-centered">
+            Já possui uma conta? <a href="/login/">Login</a>
+        </p>
+    </div>
+    {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+</body>
+
+</html>

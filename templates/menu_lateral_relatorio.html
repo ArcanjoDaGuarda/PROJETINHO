@@ -1,0 +1,26 @@
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/menu_lateral2.css' %}">
+<!-- sidebar.html -->
+<div class="user-profile">
+    {% if user.profile_picture %}
+        <img src="{{ user.profile_picture.url }}" alt="User Profile Image" style="max-width: 120px; margin-left: 10px;"><br>
+    {% else %}
+        <img src="{% static 'img/profile.jpg' %}" alt="Default Profile Image" style="max-width: 120px; margin-left: 10px;"><br>
+    {% endif %}
+    <br>
+    <h3 style="margin-left: 10px;">{{ user_name }}</h3> 
+</div>
+<div class="menu" style="margin-left: 10px;">
+    <ul>
+        <!-- Adicionando o nome do projeto -->
+        <h4>Projeto: {{ user.projeto_proin }}</h4>
+    </ul>
+</div>
+<div class="pending-tasks" style="margin-left: 10px;">
+    <br><h4>Total de Relatórios: {{ total_relatorios }}</h4>
+    <h4>Relatórios Concluídos: {{ relatorios_concluidos }}</h4>
+    <h4>Relatórios Faltando: {{ relatorios_faltando }}</h4>
+    <h4>Conclusão: {{ porcentagem_relatorio }}%</h4> 
+</div>
+{% endblock %}

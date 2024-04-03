@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Adicione aqui suas importações de CSS, JavaScript, etc. -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                    
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a href="/home" class="navbar-item">Início</a>
+                    <a href="/listas" class="navbar-item">Aulas</a>
+                    <a href="/Relatorios" class="navbar-item">Relatorios</a>
+                </div>
+                <div class="navbar-end custom-end">
+                    <div class="navbar-item">
+                                <a href="/sair" class="button is-light">
+                                    Sair
+                                </a>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+            <!-- O conteúdo das páginas será inserido aqui -->
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                    © {{ 2023 }} Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Adicione aqui seus scripts JavaScript, se necessário. -->
+</body>
+</html>

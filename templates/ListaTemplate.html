@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lista_aula2.css' %}">
+    <div class="container">
+        <div class="sidebar">
+            {% include 'menu_lateral.html' with user_name=user.username num_aulas_pendentes=2 num_relatorios_pendentes=3 porcentagem_conclusao=75 %}
+        </div>
+        <div class="main-content">
+            <h1>Lista de Aulas</h1>
+            <div>
+              <div class="pesquisar">
+                <!-- Pesquisar por Nome -->
+                <form action="/pesquisar_por_nome" method="get">
+                    <label for="nome"> Nome:</label>
+                    <input type="text" id="nome" name="nome">
+                    <input type="submit" value="Pesquisar">
+                </form>
+              </div>
+
+                <ul>
+                    {% for aula in aulas %}
+                        <li>
+                            <strong>Nome da Aula:</strong> {{ aula.nome_da_aula }} <br>
+                            <br><strong>Palestrante:</strong> {{ aula.palestrante }} <br>
+                            <form method="post" action="{% url 'salvar_status_aula' aula.id %}">
+                                {% csrf_token %}
+                                <!-- Se o usuário autenticado é o mesmo que criou a aula -->
+                                {% if user == aula.criado_por %}
+                                    <strong>Data da Aula:</strong> {{ aula.data_da_aula }} <br>
+                                    <strong>Descrição:</strong> {{ aula.descricao }} <br>
+                                    <strong>Link da Aula:</strong> <a href="{{ aula.link_da_aula }}" target="_blank" >Link Direto</a> <br>
+                                    <strong>Link da Gravação:</strong> <a href="{{ aula.link_da_gravacao }}" target="_blank">Link Direto</a> <br>
+                                    <strong>Link da Inscrição:</strong> <a href="{{ aula.link_da_inscricao }}" target="_blank">Link Direto</a> <br>
+                                    <br>
+                                    <input type="checkbox" name="assistida" {% if aula.assistida %}checked{% endif %}>
+                                    <label for="assistida">Marcar como Assistida</label>
+                                    <input type="submit" value="Salvar">
+                                {% else %}
+                                    <!-- Exibir apenas informações sobre a aula -->
+                                    <strong>Data da Aula:</strong> {{ aula.data_da_aula }} <br>
+                                    <strong>Descrição:</strong> {{ aula.descricao }} <br>
+                                    <strong>Link da Aula:</strong> <a href="{{ aula.link_da_aula }}" target="_blank" >Link Direto</a> <br>
+                                    <strong>Link da Gravação:</strong> <a href="{{ aula.link_da_gravacao }}" target="_blank">Link Direto</a> <br>
+                                    <strong>Link da Inscrição:</strong> <a href="{{ aula.link_da_inscricao }}" target="_blank">Link Direto</a> <br>
+                                    <br>
+                                {% endif %}
+                            </form>
+                            <!-- Adicione este bloco para permitir marcar a aula como concluída -->
+                            <form method="post" action="{% url 'salvar_status_aula' aula.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="aula_id" value="{{ aula.id }}">
+                                {% if aula.assistida %}
+                                    <input type="checkbox" name="concluida" checked>
+                                {% else %}
+                                    <input type="checkbox" name="concluida">
+                                {% endif %}
+                                <label for="concluida">Marcar como Concluída</label>
+                                <input type="submit" value="Salvar">
+                            </form>
+                            <br>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
